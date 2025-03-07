@@ -19,7 +19,7 @@ function App() {
         console.log("Loading notes...");  // Log when loading notes
         if (navigator.onLine) {
             try {
-                const response = await axios.get("http://localhost:5001/notes");  // Fetch from MongoDB
+                const response = await axios.get("https://savenowsynclater.onrender.com/notes");  // Fetch from MongoDB
                 console.log("Loaded notes from MongoDB:", response.data);
                 setNotes(response.data);
             } catch (error) {
@@ -37,7 +37,7 @@ function App() {
         console.log("Saving note:", note);  // Log the note to be saved
         if (navigator.onLine) {
             try {
-                const response = await axios.post("http://localhost:5001/notes", note);  // Save to MongoDB
+                const response = await axios.post("https://savenowsynclater.onrender.com/notes", note);  // Save to MongoDB
                 console.log("Note saved to MongoDB:", response.data);
                 setNotes((prevNotes) => [...prevNotes, response.data]);
             } catch (error) {
@@ -56,7 +56,7 @@ function App() {
         const offlineNotes = await getOfflineNotes();
         for (const note of offlineNotes) {
             try {
-                const response = await axios.post("http://localhost:5001/notes", note);  // Sync with MongoDB
+                const response = await axios.post("https://savenowsynclater.onrender.com/notes", note);  // Sync with MongoDB
                 console.log("Synced note:", note);
                 await clearOfflineNotes();  // Optionally clear offline notes after syncing
             } catch (error) {
